@@ -195,7 +195,8 @@ jobs:
         echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
         
         echo "## 更新内容" >> release.txt
-        echo "Openwrt 最新提交内容： " >> release.txt          
+        echo "Openwrt 最新提交内容： " >> release.txt     
+        cd openwrt
         git log -n 1 >> release.txt
           
         touch release.txt
