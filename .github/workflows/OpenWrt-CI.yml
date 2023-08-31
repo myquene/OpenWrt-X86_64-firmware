@@ -164,7 +164,8 @@ jobs:
           
           echo "## 更新内容" >> release.txt
           echo "Openwrt 最新提交内容： " >> release.txt          
-          git log -n 1 >> release.txt
+          git log --oneline -n 10 >> release.txt
+          cat release.txt
           
           touch release.txt
           echo "status=success" >> $GITHUB_OUTPUT
