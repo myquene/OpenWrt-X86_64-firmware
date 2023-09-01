@@ -58,7 +58,6 @@ jobs:
         echo "## 更新内容" >> release.txt
         echo ">具体修改" >> release.txt 
         git log --oneline -n 10 --pretty=format:"%an: %s" >> release.txt
-        echo "## 文件列表" >> release.txt
         cat release.txt
         ls -al
           
