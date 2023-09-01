@@ -210,7 +210,7 @@ jobs:
          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
       with:
         tag_name: ${{steps.tag.outputs.release_tag}}
-        body_path: release.txt
+        body_path: ./openwrt/release.txt
         files: ./openwrt/bin/targets/x86/64/*
 
     - name: Remove old Releases
