@@ -1,0 +1,75 @@
+#
+# Copyright (c) 2019-2020 P3TERX <https://p3terx.com>
+#
+# This is free software, licensed under the MIT License.
+# See /LICENSE for more information.
+#
+# https://github.com/P3TERX/Actions-OpenWrt
+# Description: Build OpenWrt using GitHub Actions
+#
+
+name: test-release
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  CONFIG_FILE: .config
+  DIY_P1_SH: diy-part1.sh
+  DIY_P2_SH: diy-part2.sh
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        docker rmi `docker images -q`
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
+
+    - name: Clone source code
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
+
+    - name: Generate Release Tag
+      id: tag
+      run: |
+        echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
+        
+        echo "## 更新内容" >> release.txt
+        echo "Openwrt 最新提交内容： " >> release.txt     
+        
+        cd openwrt
+        git log --oneline -n 10  --pretty=format:"%an: %s" >> release.txt
+        sed -i  "s/^/\t/g" release.txt
+        cat release.txt
+        ls -al
+          
+        echo "status=success" >> $GITHUB_OUTPUT
+
+    - name: Upload Firmware To Release
+      uses: softprops/action-gh-release@v0.1.15
+      env:
+         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      with:
+        tag_name: ${{steps.tag.outputs.release_tag}}
+        body_path: ./openwrt/release.txt
+        files: ./openwrt/bin/targets/x86/64/*
