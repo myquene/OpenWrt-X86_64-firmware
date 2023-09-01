@@ -1,0 +1,47 @@
+# 
+# <https://github.com/KFERMercer/OpenWrt-CI>
+#
+# Copyright (C) 2019 P3TERX
+#
+# Copyright (C) 2020 KFERMercer
+#
+name: OpenWrt-CI
+
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
+        
+  #schedule:
+   # - cron: 0 20 * * *
+
+jobs:
+
+  build_openwrt:
+
+    name: Build OpenWrt Firmware
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout OpenWrt
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+                
+      - name: Generate Release Tag
+        id: tag
+        run: |
+          echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
+          
+          echo "## 更新内容" >> release.txt
+          echo "Openwrt 最新提交内容： " >> release.txt          
+          git log --oneline -n 10 >> release.txt
+          cat release.txt
+          ll
+          echo "## 结束"
+     
