@@ -196,8 +196,10 @@ jobs:
         
         echo "## 更新内容" >> release.txt
         echo "Openwrt 最新提交内容： " >> release.txt     
+        
         cd openwrt
         git log --oneline -n 10  --pretty=format:"%an: %s" >> release.txt
+        sed -i  "s/^/\t/g" release.txt
         cat release.txt
         ls -al
           
