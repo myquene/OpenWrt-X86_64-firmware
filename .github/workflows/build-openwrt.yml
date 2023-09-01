@@ -194,12 +194,12 @@ jobs:
       run: |
         echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
         
-        echo "## 更新内容" >> release.txt
-        echo "Openwrt 最新提交内容： " >> release.txt     
-        
         cd openwrt
+        echo "## 更新内容" >> release.txt
+        echo "Openwrt 最新提交内容： " >> release.txt  
         git log --oneline -n 10  --pretty=format:"%an: %s" >> release.txt
         sed -i  "s/^/\t/g" release.txt
+        
         cat release.txt
         ls -al
           
