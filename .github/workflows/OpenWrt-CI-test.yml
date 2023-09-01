@@ -6,7 +6,6 @@
 # Copyright (C) 2020 KFERMercer
 #
 name: OpenWrt-CI-test
-
 on:
   repository_dispatch:
   workflow_dispatch:
@@ -15,33 +14,55 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
-        
-  #schedule:
-   # - cron: 0 20 * * *
+
+env:
+  REPO_URL: https://github.com/coolsnowwolf/lede
+  REPO_BRANCH: master
+  CONFIG_FILE: .config
+  DIY_P1_SH: diy-part1.sh
+  DIY_P2_SH: diy-part2.sh
 
 jobs:
-
-  build_openwrt:
-
-    name: Build OpenWrt Firmware
-
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
 
     steps:
-      - name: Checkout OpenWrt
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-                
-      - name: Generate Release Tag
-        id: tag
-        run: |
-          echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Clone source code
+      working-directory: /workdir
+      run: |
+        df -hT $PWD
+        git clone $REPO_URL -b $REPO_BRANCH openwrt
+        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt    
+
+    - name: Upload buildinfo
+      uses: actions/upload-artifact@v3
+      with:
+        name: OpenWrt_buildinfo
+        path: ./openwrt/artifact/buildinfo/
+  
+    - name: Upload firmware
+      uses: actions/upload-artifact@v3
+      with:
+        name: OpenWrt_firmware
+        path: ./openwrt/bin/targets/
+
+    - name: Generate Release Tag
+      id: tag
+      run: |
+        echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
+        
+        echo "## 更新内容" >> release.txt
+        echo "Openwrt 最新提交内容： " >> release.txt     
+        cd openwrt
+        git log --oneline -n 10 >> release.txt
+        cat release.txt
+        ls -al
+        echo "## 结束"
           
-          echo "## 更新内容" >> release.txt
-          echo "Openwrt 最新提交内容： " >> release.txt          
-          git log --oneline -n 10 >> release.txt
-          cat release.txt
-          ll
-          echo "## 结束"
+        touch release.txt
+        echo "status=success" >> $GITHUB_OUTPUT
+                
      
