@@ -33,11 +33,8 @@ jobs:
     - name: Clone source code
       working-directory: /workdir
       run: |
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
         df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt    
 
     - name: Generate Release Tag
       id: tag
@@ -46,7 +43,7 @@ jobs:
         
         echo "## 更新内容" >> release.txt
         echo "Openwrt 最新提交内容： " >> release.txt     
-        cd openwrt
+        cd lede
         git log --oneline -n 10 >> release.txt
         cat release.txt
         ls -al
