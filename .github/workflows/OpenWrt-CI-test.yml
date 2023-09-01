@@ -33,23 +33,11 @@ jobs:
     - name: Clone source code
       working-directory: /workdir
       run: |
-        df -hT $PWD
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+        df -hT $PWD
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt    
-
-    - name: Upload buildinfo
-      uses: actions/upload-artifact@v3
-      with:
-        name: OpenWrt_buildinfo
-        path: ./openwrt/artifact/buildinfo/
-  
-    - name: Upload firmware
-      uses: actions/upload-artifact@v3
-      with:
-        name: OpenWrt_firmware
-        path: ./openwrt/bin/targets/
 
     - name: Generate Release Tag
       id: tag
