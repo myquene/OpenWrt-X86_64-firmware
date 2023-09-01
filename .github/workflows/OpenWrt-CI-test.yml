@@ -34,6 +34,8 @@ jobs:
       working-directory: /workdir
       run: |
         df -hT $PWD
+        sudo mkdir -p /workdir
+        sudo chown $USER:$GROUPS /workdir
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt    
 
