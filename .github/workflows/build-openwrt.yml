@@ -100,9 +100,11 @@ jobs:
         # CONFIG_PACKAGE_amdgpu-firmware is not set
         # CONFIG_PACKAGE_bnx2-firmware is not set
         # CONFIG_PACKAGE_bnx2x-firmware is not set
+        CONFIG_PACKAGE_adguardhome=y
         CONFIG_PACKAGE_ip6tables=y
         # CONFIG_PACKAGE_iptables-mod-ipsec is not set
         CONFIG_PACKAGE_ipv6helper=y
+        # CONFIG_PACKAGE_kmod-amazon-ena is not set
         # CONFIG_PACKAGE_kmod-amd-xgbe is not set
         # CONFIG_PACKAGE_kmod-bnx2 is not set
         # CONFIG_PACKAGE_kmod-bnx2x is not set
@@ -128,11 +130,13 @@ jobs:
         # CONFIG_PACKAGE_libminiupnpc is not set
         # CONFIG_PACKAGE_libnatpmp is not set
         # CONFIG_PACKAGE_luci-app-accesscontrol is not set
+        CONFIG_PACKAGE_luci-app-adguardhome=y
         # CONFIG_PACKAGE_luci-app-ipsec-vpnd is not set
         # CONFIG_PACKAGE_luci-app-unblockmusic is not set
         # CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go is not set
         # CONFIG_PACKAGE_luci-app-xlnetacc is not set
         # CONFIG_PACKAGE_luci-app-zerotier is not set
+        CONFIG_PACKAGE_luci-i18n-adguardhome-zh-cn=y
         CONFIG_PACKAGE_luci-proto-ipv6=y
         CONFIG_PACKAGE_odhcp6c=y
         CONFIG_PACKAGE_odhcp6c_ext_cer_id=0
