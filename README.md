@@ -8,6 +8,8 @@
 
 中文教程 https://p3terx.com/archives/build-openwrt-with-github-actions.html
 
+lede源码地址 https://github.com/coolsnowwolf/lede
+
 ## 使用
 
 - 点击 [Use this template](https://github.com/P3TERX/Actions-OpenWrt/generate) button to create a new repository.
