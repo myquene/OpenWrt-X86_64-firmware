@@ -99,9 +99,13 @@ jobs:
         CONFIG_TARGET_x86_64_DEVICE_generic=y
         CONFIG_PACKAGE_6in4=y
         CONFIG_PACKAGE_adguardhome=y
+        CONFIG_PACKAGE_boost=y
+        CONFIG_PACKAGE_boost-program_options=y
+        CONFIG_PACKAGE_boost-system=y
         CONFIG_PACKAGE_coreutils-nohup=y
         CONFIG_PACKAGE_haproxy=y
         CONFIG_PACKAGE_ip6tables=y
+        CONFIG_PACKAGE_ipt2socks=y
         CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
         CONFIG_PACKAGE_iptables-mod-iprange=y
         CONFIG_PACKAGE_iptables-mod-socket=y
@@ -123,19 +127,24 @@ jobs:
         CONFIG_PACKAGE_kmod-sit=y
         CONFIG_PACKAGE_libltdl=y
         CONFIG_PACKAGE_liblua5.3=y
+        CONFIG_PACKAGE_libstdcpp=y
+        # CONFIG_PACKAGE_luci-app-accesscontrol is not set
         CONFIG_PACKAGE_luci-app-adguardhome=y
-        CONFIG_PACKAGE_luci-app-passwall2=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Haproxy=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_ShadowsocksR_Libev_Client=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Shadowsocks_Libev_Client=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_Simple_Obfs=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_SingBox=y
-        CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin=y
-        CONFIG_PACKAGE_luci-app-passwall2_Iptables_Transparent_Proxy=y
+        CONFIG_PACKAGE_luci-app-passwall=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_SingBox=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin=y
+        CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray=y
+        CONFIG_PACKAGE_luci-app-passwall_Iptables_Transparent_Proxy=y
         CONFIG_PACKAGE_luci-app-smartdns=y
         # CONFIG_PACKAGE_luci-app-unblockmusic_INCLUDE_UnblockNeteaseMusic_Go is not set
         CONFIG_PACKAGE_luci-i18n-adguardhome-zh-cn=y
-        CONFIG_PACKAGE_luci-i18n-passwall2-zh-cn=y
+        CONFIG_PACKAGE_luci-i18n-passwall-zh-cn=y
         CONFIG_PACKAGE_luci-i18n-smartdns-zh-cn=y
         CONFIG_PACKAGE_luci-proto-ipv6=y
         CONFIG_PACKAGE_luci-theme-argon=y
@@ -147,6 +156,7 @@ jobs:
         CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
         CONFIG_PACKAGE_sing-box=y
         CONFIG_PACKAGE_smartdns=y
+        CONFIG_PACKAGE_trojan-plus=y
         CONFIG_PACKAGE_unzip=y
         CONFIG_PACKAGE_v2ray-geoip=y
         CONFIG_PACKAGE_v2ray-geosite=y
@@ -161,6 +171,10 @@ jobs:
         CONFIG_TARGET_KERNEL_PARTSIZE=200
         CONFIG_TARGET_ROOTFS_PARTSIZE=1000
         # CONFIG_VMDK_IMAGES is not set
+        CONFIG_boost-compile-visibility-hidden=y
+        CONFIG_boost-runtime-shared=y
+        CONFIG_boost-static-and-shared-libs=y
+        CONFIG_boost-variant-release=y
         EOF
         #
         # ===============================================================
