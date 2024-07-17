@@ -32,10 +32,6 @@ jobs:
 
     steps:
     - name: Delete releases and workflows runs
-      uses: ophub/delete-releases-workflows@main
-      with:
-        delete_releases: false
-        delete_workflows: true
-        workflows_keep_day: 5
-        gh_token: ${{ secrets.REPO_TOKEN }}
+      run: |
+        ls -al
 
