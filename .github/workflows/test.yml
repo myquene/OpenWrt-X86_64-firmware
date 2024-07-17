@@ -34,4 +34,6 @@ jobs:
     - name: Delete releases and workflows runs
       run: |
         ls -al
+        pwd
+        df -h
 
