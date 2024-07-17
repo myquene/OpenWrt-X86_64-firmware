@@ -31,43 +31,11 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@main
-
-    - name: Initialization environment
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: |
-        docker rmi `docker images -q`
-        sudo mkdir -p /workdir
-        sudo chown $USER:$GROUPS /workdir
-
-    - name: Clone source code
-      working-directory: /workdir
-      run: |
-        df -hT $PWD
-        git clone $REPO_URL -b $REPO_BRANCH openwrt
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
-
-    - name: Generate Release Tag
-      id: tag
-      run: |
-        echo "release_tag=OpenWrt_X86_64_$(date +"%Y-%m-%d_%H_%M")" >> $GITHUB_OUTPUT
-        
-        cd openwrt
-        echo "## 更新内容" >> release.txt
-        echo ">具体修改" >> release.txt 
-        git log --oneline -n 10 --pretty=format:"%an: %s" >> release.txt
-        cat release.txt
-        ls -al
-          
-        echo "status=success" >> $GITHUB_OUTPUT
-
-    - name: Upload Firmware To Release
-      uses: softprops/action-gh-release@v0.1.15
-      env:
-         GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+    - name: Delete releases and workflows runs
+      uses: ophub/delete-releases-workflows@main
       with:
-        tag_name: ${{steps.tag.outputs.release_tag}}
-        body_path: ./openwrt/release.txt
-        files: ./openwrt/bin/targets/x86/64/*
+        delete_releases: false
+        delete_workflows: true
+        workflows_keep_day: 5
+        gh_token: ${{ secrets.REPO_TOKEN }}
+
