@@ -34,7 +34,6 @@ jobs:
     - name: Delete releases and workflows runs
       run: |
         cd /home/runner/runners/
-        rm -rf /snap/*
         rm -rf /home/runner/runners/*
         ls -al
         pwd
