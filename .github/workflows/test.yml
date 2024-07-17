@@ -33,9 +33,7 @@ jobs:
     steps:
     - name: Delete releases and workflows runs
       run: |
-        cd /home/runner/runners/
-        #rm -rf /home/runner/runners/*
-        ls -al
+        rm -rf /workdir
         pwd
         df -h
 
