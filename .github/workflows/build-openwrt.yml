@@ -95,10 +95,10 @@ jobs:
         libpython3-dev qemu-utils rsync scons squashfs-tools subversion swig texinfo uglifyjs upx-ucl unzip \
         vim wget xmlto xxd zlib1g-dev python3-setuptools
         sudo -E apt-get -qq autoremove --purge
-        sudo -E systemctl daemon-reload
         sudo -E apt-get -qq clean
-        sudo -E timedatectl set-timezone "Asia/Shanghai"
-        sudo mkdir -p /workdir
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/local/lib/android /opt/ghc /usr/share/dotnet /usr/local/graalvm /usr/local/.ghcup \
+        /usr/local/share/powershell /usr/local/share/chromium /usr/local/lib/node_modules
+        sudo timedatectl set-timezone "$TZ"
         sudo chown $USER:$GROUPS $GITHUB_WORKSPACE
 
     - name: Clone source code
